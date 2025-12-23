@@ -1,0 +1,36 @@
+app = "crypto-trading-bot"
+primary_region = "iad" # Choose a region close to you
+
+[build]
+  dockerfile = "Dockerfile"
+
+[deploy]
+  release_command = "/app/wait-for-db.sh" # Example: Wait for database to be ready
+
+[http_service]
+  internal_port = 8080 # The port your application listens on
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type = "requests"
+    hard_limit = 1000
+    soft_limit = 500
+
+  [[http_service.checks]]
+    path = "/health" # Your health check endpoint
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "5s"
+
+[env]
+  # These will be populated from Fly.io secrets
+  ROBINHOOD_API_KEY = ""
+  DATABASE_URL = "" # Example: postgres://user:password@host:port/database
+  LOG_LEVEL = "INFO"
+
+[mounts]
+  source = "data"
+  destination = "/data"
