@@ -12,7 +12,7 @@ class MomentumStrategy:
     """
 
     def __init__(self, lookback_window: int = 20, volatility_window: int = 20, mean_reversion_window: int = 5,
-                 momentum_threshold: float = 0.025, mean_reversion_threshold: float = 0.005):
+                 momentum_threshold: float = 0.005, mean_reversion_threshold: float = 0.005):
         """
         Initializes the MomentumStrategy.
 
