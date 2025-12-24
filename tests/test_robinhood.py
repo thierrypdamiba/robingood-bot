@@ -2,7 +2,7 @@ import os
 import unittest
 from unittest.mock import patch, MagicMock
 import pytest
-from robinhood_client import RobinhoodClient
+from src.robinhood.client import RobinhoodClient
 from dotenv import load_dotenv
 
 load_dotenv()
